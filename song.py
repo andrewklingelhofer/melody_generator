@@ -65,6 +65,7 @@ scales = {
 options = (
     "'scale': print scale",
     "'8notes': print 8 random notes",
+    "'16notes': print 16 random notes",
     "'h': help",
     "'e': exit song",
 )
@@ -74,6 +75,8 @@ def check_scale_options(i, song):
         song.printScale()
     elif i == '8notes':
         song.random8Notes()
+    elif i == '16notes':
+        song.random16Notes()
     elif i == 'h':
         for option in options:
             print option
@@ -92,21 +95,23 @@ class Song:
         print self.scale
 
     def random8Notes(self):
-        eightNotes = []
-        for x in range(0, 8):
+        # Always begins with tonic
+        eightNotes = [self.scale[0]]
+        for x in range(0, 8-1):
             num = randint(0, len(self.scale)-1)
-            eightNotes.append(cMajor[num])
+            eightNotes.append(self.scale[num])
         print "Random 8 Notes: " + str(eightNotes)
 
     def random16Notes(self):
-        sixteenNotes = []
-        for x in range(0, 8):
+        # Always begins with tonic
+        sixteenNotes = [self.scale[0]]
+        for x in range(0, 16-1):
             num = randint(0, len(self.scale)-1)
             sixteenNotes.append(self.scale[num])
-        print "Random 8 Notes: " + str(sixteenNotes)
+        print "Random 16 Notes: " + str(sixteenNotes)
 
 def create_song():
-    print "Input Key: (c, g, d, a, e, b, f, bb, eb, ab, db, gb)"
+    print "Input Key: (c, g, d, a, e, b, f, bb, eb, ab, db, gb, c#)"
     key = raw_input('>>> ')
     print "Major or Minor? (M or m)"
     m_m = raw_input('>>> ')
