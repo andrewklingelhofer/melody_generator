@@ -6,6 +6,7 @@ options = (
     "'8notes': print 8 random notes",
     "'16notes': print 16 random notes",
     "'get mode <mode>': get mode from song key",
+    "'cof <major/minor>': print circle of fifths",
     "'h': help",
     "'e': exit song",
 )
@@ -25,6 +26,18 @@ def check_scale_options(i, song):
             print new_scale
         else:
             print "Please input mode name"
+    elif i[:3] == 'cof':
+        a = i.split(' ')
+        if len(a) > 1:
+            chord_type = a[1]
+            if chord_type == 'major':
+                print cof_major
+            elif chord_type == 'minor':
+                print cof_minor
+            else:
+                print "Please use valid circle of fifths type"
+        else:
+            print "Please enter circle of fifths type"
     elif i == 'h':
         for option in options:
             print option
@@ -77,7 +90,7 @@ cof_major = [
 cof_minor = [
         aMinor,
         eMinor,
-        bMinor
+        bMinor,
         fsharpMinor,
         csharpMinor,
         abMinor,
@@ -88,7 +101,6 @@ cof_minor = [
         gMinor,
         dMinor,
 ]
-    
 
 # Major Chordal Relationships
 def get_mode(mode, scale):
@@ -125,7 +137,7 @@ def get_mode(mode, scale):
             locrian.append(note)
         return locrian
     else:
-        return None
+        return "Please enter valid mode" 
 
 # Scale Options
 scales = {
