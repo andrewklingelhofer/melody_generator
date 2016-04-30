@@ -9,7 +9,7 @@ options = (
 )
 
 def checkOptions(i):
-    song = Song('none')
+    song = None 
     if i == 'c':
         song = create_song()
     elif i == 'h':
@@ -17,7 +17,7 @@ def checkOptions(i):
             print option
     elif i == 'q':
         exit()
-    if not song.printScale == 'none':
+    if not song == None:
         return song
 
 if __name__ == "__main__":
