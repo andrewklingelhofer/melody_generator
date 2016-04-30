@@ -57,6 +57,39 @@ fMinor = ["F", "G", "Ab", "Bb", "C", "Db", "Eb"]
 bbMinor = ["Bb", "C", "Db", "Eb", "F", "Gb", "Ab"]
 ebMinor = ["Eb", "F", "Gb", "Ab", "Bb", "Cb", "Db"]
 
+# Circle of Fifths: Major
+cof_major = [
+        cMajor, 
+        gMajor, 
+        dMajor, 
+        aMajor, 
+        eMajor, 
+        bMajor, 
+        gbMajor,
+        dbMajor,
+        abMajor,
+        ebMajor,
+        bbMajor,
+        fMajor,
+]
+
+#Circle of Fifths: Minor
+cof_minor = [
+        aMinor,
+        eMinor,
+        bMinor
+        fsharpMinor,
+        csharpMinor,
+        abMinor,
+        ebMinor,
+        bbMinor,
+        fMinor,
+        cMinor,
+        gMinor,
+        dMinor,
+]
+    
+
 # Major Chordal Relationships
 def get_mode(mode, scale):
     # i.e. get_mode(lydian, cMajor): [F, G, A, B, C, D, E]
@@ -130,12 +163,10 @@ scales = {
     ('eb', 'm'): ebMinor,
 }
 
-
 def get_scale(key, m):
     return scales[(key, m)]    
 
 # Song Class
-
 class Song:
     
     def __init__(self, scale):
