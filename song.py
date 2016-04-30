@@ -1,6 +1,6 @@
 from random import randint
 
-# Scales
+# Major Scales
 cMajor = ["C", "D", "E", "F", "G", "A", "B"]
 gMajor = ["G", "A", "B", "C", "D", "E", "F#"]
 dMajor = ["D", "E", "F#", "G", "A", "B", "C#"]
@@ -14,9 +14,24 @@ abMajor = ["Ab", "Bb", "C", "Db", "Eb", "F", "G"]
 dbMajor = ["Db", "Eb", "F", "Gb", "Ab", "Bb", "C"]
 gbMajor = ["Gb", "Ab", "Bb", "Cb", "Db", "Eb", "F"]
 
+# Minor Scales
+aMinor = ["A", "B", "C", "D", "E", "F", "G"]
+eMinor = ["E", "F#", "G", "A", "B", "C", "D"]
+bMinor = ["B", "C#", "D", "E", "F#", "G", "A"]
+fsharpMinor = ["F#", "G#", "A", "B", "C#", "D", "E"]
+csharpMinor = ["C#", "D#", "E", "F#", "G#", "A", "B"]
+abMinor = ["Ab", "Bb", "Cb", "Db", "Eb", "F", "Gb"]
+dMinor = ["D", "E", "F", "G", "A", "Bb", "C"]
+gMinor = ["G", "A", "Bb", "C", "D", "Eb", "F"]
+cMinor = ["C", "D", "Eb", "F", "G", "Ab", "Bb"]
+fMinor = ["F", "G", "Ab", "Bb", "C", "Db", "Eb"]
+bbMinor = ["Bb", "C", "Db", "Eb", "F", "Gb", "Ab"]
+ebMinor = ["Eb", "F", "Gb", "Ab", "Bb", "Cb", "Db"]
+
 # Scale Options
 
 scales = {
+    # Major
     ('c', 'M'): cMajor,
     ('g', 'M'): gMajor,
     ('d', 'M'): dMajor,
@@ -29,6 +44,20 @@ scales = {
     ('ab', 'M'): abMajor,
     ('db', 'M'): dbMajor,
     ('gb', 'M'): gbMajor,
+    
+    #Minor
+    ('a', 'm'): aMinor,
+    ('e', 'm'): eMinor,
+    ('b', 'm'): bMinor,
+    ('f#', 'm'): fsharpMinor,
+    ('c#', 'm'): csharpMinor,
+    ('ab', 'm'): abMinor,
+    ('d', 'm'): dMinor,
+    ('g', 'm'): gMinor,
+    ('c', 'm'): cMinor,
+    ('f', 'm'): fMinor,
+    ('bb', 'm'): bbMinor,
+    ('eb', 'm'): ebMinor,
 }
 
 # Song Options
