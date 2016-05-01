@@ -139,6 +139,13 @@ def get_mode(mode, scale):
     else:
         return "Please enter valid mode" 
 
+# Common Chord Progressions
+
+one_five_six_four = [1, 5, 6, 4]
+
+def get_chord_progression(chord_progression):
+    # Find chord progression based on starting key
+
 # Scale Options
 scales = {
     # Major
