@@ -69,32 +69,32 @@ def check_scale_options(i, song):
             print option
 
 # Major Scales
-cMajor = ["C", "D", "E", "F", "G", "A", "B"]
-gMajor = ["G", "A", "B", "C", "D", "E", "F#"]
-dMajor = ["D", "E", "F#", "G", "A", "B", "C#"]
-aMajor = ["A", "B", "C#", "D", "E", "F#", "G#"]
-eMajor = ["E", "F#", "G#", "A", "B", "C#", "D#"]
-bMajor = ["B", "C#", "D#", "E", "F#", "G#", "A#"]
-fMajor = ["F", "G", "A", "Bb", "C", "D", "E"]
-bbMajor = ["Bb", "C", "D", "Eb", "F", "G", "A"]
-ebMajor = ["Eb", "F", "G", "Ab", "Bb", "C", "D"]
-abMajor = ["Ab", "Bb", "C", "Db", "Eb", "F", "G"]
-dbMajor = ["Db", "Eb", "F", "Gb", "Ab", "Bb", "C"]
-gbMajor = ["Gb", "Ab", "Bb", "Cb", "Db", "Eb", "F"]
+cMajor = (["C", "D", "E", "F", "G", "A", "B"], 'C Major')
+gMajor = (["G", "A", "B", "C", "D", "E", "F#"], 'G Major')
+dMajor = (["D", "E", "F#", "G", "A", "B", "C#"], 'D Major')
+aMajor = (["A", "B", "C#", "D", "E", "F#", "G#"], 'A Major')
+eMajor = (["E", "F#", "G#", "A", "B", "C#", "D#"], 'E Major')
+bMajor = (["B", "C#", "D#", "E", "F#", "G#", "A#"], 'B Major')
+fMajor = (["F", "G", "A", "Bb", "C", "D", "E"], 'F Major')
+bbMajor = (["Bb", "C", "D", "Eb", "F", "G", "A"], 'Bb Major')
+ebMajor = (["Eb", "F", "G", "Ab", "Bb", "C", "D"], 'Eb Major')
+abMajor = (["Ab", "Bb", "C", "Db", "Eb", "F", "G"], 'Ab Major')
+dbMajor = (["Db", "Eb", "F", "Gb", "Ab", "Bb", "C"], 'Db Major')
+gbMajor = (["Gb", "Ab", "Bb", "Cb", "Db", "Eb", "F"], 'Gb Major')
 
 # Minor Scales
-aMinor = ["A", "B", "C", "D", "E", "F", "G"]
-eMinor = ["E", "F#", "G", "A", "B", "C", "D"]
-bMinor = ["B", "C#", "D", "E", "F#", "G", "A"]
-fsharpMinor = ["F#", "G#", "A", "B", "C#", "D", "E"]
-csharpMinor = ["C#", "D#", "E", "F#", "G#", "A", "B"]
-abMinor = ["Ab", "Bb", "Cb", "Db", "Eb", "F", "Gb"]
-dMinor = ["D", "E", "F", "G", "A", "Bb", "C"]
-gMinor = ["G", "A", "Bb", "C", "D", "Eb", "F"]
-cMinor = ["C", "D", "Eb", "F", "G", "Ab", "Bb"]
-fMinor = ["F", "G", "Ab", "Bb", "C", "Db", "Eb"]
-bbMinor = ["Bb", "C", "Db", "Eb", "F", "Gb", "Ab"]
-ebMinor = ["Eb", "F", "Gb", "Ab", "Bb", "Cb", "Db"]
+aMinor = (["A", "B", "C", "D", "E", "F", "G"], 'A Minor')
+eMinor = (["E", "F#", "G", "A", "B", "C", "D"], 'E Minor')
+bMinor = (["B", "C#", "D", "E", "F#", "G", "A"], 'B Minor')
+fsharpMinor = (["F#", "G#", "A", "B", "C#", "D", "E"], 'F# Minor')
+csharpMinor = (["C#", "D#", "E", "F#", "G#", "A", "B"], 'C# Minor')
+abMinor = (["Ab", "Bb", "Cb", "Db", "Eb", "F", "Gb"], 'Ab Minor')
+dMinor = (["D", "E", "F", "G", "A", "Bb", "C"], 'D Minor')
+gMinor = (["G", "A", "Bb", "C", "D", "Eb", "F"], 'G Minor')
+cMinor = (["C", "D", "Eb", "F", "G", "Ab", "Bb"], 'C Minor')
+fMinor = (["F", "G", "Ab", "Bb", "C", "Db", "Eb"], 'F Minor')
+bbMinor = (["Bb", "C", "Db", "Eb", "F", "Gb", "Ab"], 'Bb Minor')
+ebMinor = (["Eb", "F", "Gb", "Ab", "Bb", "Cb", "Db"], 'Eb Minor')
 
 # Circle of Fifths: Major
 cof_major = [
@@ -166,11 +166,11 @@ def get_mode(mode, scale):
         return "Please enter valid mode" 
 
 # Common Chord Progressions
-
 #one_five_six_four = [1, 5, 6, 4]
 
 #def get_chord_progression(chord_progression):
     # Find chord progression based on starting key
+    # i.e. 
 
 # Scale Options
 scales = {
@@ -215,38 +215,39 @@ def get_relative_major(scale):
     # Only works if passed a minor scale 
     first_note = scale[0]
     for major_scale in cof_major:
-        if major_scale[5] == first_note:
-            print major_scale
+        if major_scale[0][5] == first_note:
+            print str(major_scale[1]) + ": " + str(major_scale[0])
 
 def get_relative_minor(scale):
     # Only works if passed a major scale
     first_note = scale[0]
     for minor_scale in cof_minor:
-        if minor_scale[2] == first_note:
-            print minor_scale
+        if minor_scale[0][2] == first_note:
+            print str(minor_scale[1]) + ": " + str(minor_scale[0])
 
 def get_parallel_major(scale):
     # Only works if passed a minor scale
     first_note = scale[0]
     for major_scale in cof_major:
-        if major_scale[0] == first_note:
-            print major_scale
+        if major_scale[0][0] == first_note:
+            print str(major_scale[1]) + ": " + str(major_scale[0])
 
 def get_parallel_minor(scale):
     # Only works if passed a major scale
     first_note = scale[0]
     for minor_scale in cof_minor:
-        if minor_scale[0] == first_note:
-            print minor_scale
+        if minor_scale[0][0] == first_note:
+            print str(minor_scale[1]) + ": " + str(minor_scale[0])
 
 # Song Class
 class Song:
     
-    def __init__(self, scale):
+    def __init__(self, scale, scale_name):
         self.scale = scale
+        self.scale_name = scale_name
 
     def printScale(self):
-        print self.scale
+        print self.scale_name + ": " + str(self.scale)
 
     def random8Notes(self):
         # Always begins with tonic
@@ -270,7 +271,7 @@ def create_song():
     print "Major or Minor? (M or m)"
     m_m = raw_input('>>> ')
     scale = get_scale(key, m_m)
-    song = Song(scale)
+    song = Song(scale[0], scale[1])
     song.printScale()
     return song
 
