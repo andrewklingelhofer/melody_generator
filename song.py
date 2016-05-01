@@ -215,14 +215,14 @@ def get_relative_major(scale):
     # Only works if passed a minor scale 
     first_note = scale[0]
     for major_scale in cof_major:
-        if major_scale[2] == first_note:
+        if major_scale[5] == first_note:
             print major_scale
 
 def get_relative_minor(scale):
     # Only works if passed a major scale
     first_note = scale[0]
     for minor_scale in cof_minor:
-        if minor_scale[5] == first_note:
+        if minor_scale[2] == first_note:
             print minor_scale
 
 def get_parallel_major(scale):
