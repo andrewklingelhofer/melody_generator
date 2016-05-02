@@ -6,6 +6,7 @@ options = (
     "'print cp': print chord progression",
     "'8notes': print 8 random notes",
     "'16notes': print 16 random notes",
+    "'melody cp': print 4 notes per chord in progression",
     "'get mode <mode>': get mode from song key",
     "'get relative <major/minor>': get relative minor/major key",
     "'get parallel <major/minor>': get parallel minor/major key",
@@ -24,6 +25,8 @@ def check_scale_options(i, song):
         song.random8Notes()
     elif i == '16notes':
         song.random16Notes()
+    elif i == 'melody cp':
+        song.cp_melody()
     elif i[:8] == 'get mode':
         a = i.split(' ')
         if len(a) > 2:
@@ -142,33 +145,33 @@ cof_minor = [
 # Major Chordal Relationships
 def get_mode(mode, scale):
     # i.e. get_mode(lydian, cMajor): [F, G, A, B, C, D, E]
-    if mode == "ionian":
+    if mode == "ionian" or mode == "one":
         return scale
-    elif mode == "dorian":
+    elif mode == "dorian" or mode == "two":
         dorian = scale[1:]
         dorian.append(scale[0])
         return dorian
-    elif mode == "phrygian":
+    elif mode == "phrygian" or mode == "three":
         phrygian = scale[2:]
         for note in scale[:2]:
             phrygian.append(note)
         return phrygian
-    elif mode == "lydian":
+    elif mode == "lydian" or mode == "four":
         lydian = scale[3:]
         for note in scale[:3]:
             lydian.append(note)
         return lydian
-    elif mode == "mixolydian" or mode == "dominant":
+    elif mode == "mixolydian" or mode == "dominant" or mode == "five":
         dominant = scale[4:]
         for note in scale[:4]:
             dominant.append(note)
         return dominant
-    elif mode == "aeolian" or mode == "minor":
+    elif mode == "aeolian" or mode == "minor" or mode == "six":
         aeolian = scale[5:]
         for note in scale[:5]:
             aeolian.append(note)
         return aeolian
-    elif mode == "locrian":
+    elif mode == "locrian" or mode == "seven":
         locrian = scale[6:]
         for note in scale[:6]:
             locrian.append(note)
@@ -177,20 +180,28 @@ def get_mode(mode, scale):
         return "Please enter valid mode" 
 
 # Common Chord Progressions
-chord_progressions = {
-    'one five six four':  [1, 5, 6, 4],
-}
+chord_progression_names = [
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "dominant",
+        "tonic",
+]
 
 def get_chord_progression(chord_progression, song):
     # Find chord progression based on starting key
     # i.e. one four five four
     # i.e. one five flat two six (currently not an option)
-    name = '' 
     for chord in chord_progression:
-        name += chord + ' '
-    for progression in chord_progressions:
-        if name[:len(name)-1] == progression:
-            song.chord_progression = chord_progressions[progression]
+        if not chord in chord_progression_names:
+            print "Chord isn't part of accepted progressions"
+            print "i.e. 'one five six four'"
+            return None
+    song.chord_progression = chord_progression
 
 # Scale Options
 scales = {
@@ -288,6 +299,23 @@ class Song:
             num = randint(0, len(self.scale)-1)
             sixteenNotes.append(self.scale[num])
         print "Random 16 Notes: " + str(sixteenNotes)
+
+    def cp_melody(self):
+        if not self.chord_progression == None:
+            melody = [self.scale[0]]
+            for x in range(0, 3):
+                num = randint(0, len(self.scale)-1)
+                melody.append(self.scale[num])
+            for x in range(0, len(self.chord_progression)-1):
+                # Done three more times to get 16
+                chord_name = self.chord_progression[x+1]
+                chord = get_mode(chord_name, self.scale)
+                for y in range(0, 4):
+                    num = randint(0, len(chord)-1)
+                    melody.append(chord[num])
+            print melody 
+        else:
+            print "No chord progression selected"
 
 def create_song():
     print "Input Key: (c, g, d, a, e, b, f, bb, eb, ab, db, gb, c#)"
