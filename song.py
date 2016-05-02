@@ -3,11 +3,13 @@ from random import randint
 # Song Options
 options = (
     "'scale': print scale",
+    "'print cp': print chord progression",
     "'8notes': print 8 random notes",
     "'16notes': print 16 random notes",
     "'get mode <mode>': get mode from song key",
     "'get relative <major/minor>': get relative minor/major key",
     "'get parallel <major/minor>': get parallel minor/major key",
+    "'cp <chord progression>': i.e. one five six four",
     "'cof <major/minor>': print circle of fifths",
     "'h': help",
     "'e': exit song",
@@ -16,6 +18,8 @@ options = (
 def check_scale_options(i, song):
     if i == 'scale':
         song.printScale()
+    if i == 'print cp':
+        song.print_cp()
     elif i == '8notes':
         song.random8Notes()
     elif i == '16notes':
@@ -52,6 +56,13 @@ def check_scale_options(i, song):
                 print "Please use valid relative"
         else:
             print "Please enter relative type"
+    elif i[:2] == 'cp':
+        a = i.split(' ')
+        if len(a) > 1:
+            chord_progression = a[1:]
+            get_chord_progression(chord_progression, song)
+        else:
+            print "Please enter valid chord progression"
     elif i[:3] == 'cof':
         a = i.split(' ')
         if len(a) > 1:
@@ -166,11 +177,20 @@ def get_mode(mode, scale):
         return "Please enter valid mode" 
 
 # Common Chord Progressions
-#one_five_six_four = [1, 5, 6, 4]
+chord_progressions = {
+    'one five six four':  [1, 5, 6, 4],
+}
 
-#def get_chord_progression(chord_progression):
+def get_chord_progression(chord_progression, song):
     # Find chord progression based on starting key
-    # i.e. 
+    # i.e. one four five four
+    # i.e. one five flat two six (currently not an option)
+    name = '' 
+    for chord in chord_progression:
+        name += chord + ' '
+    for progression in chord_progressions:
+        if name[:len(name)-1] == progression:
+            song.chord_progression = chord_progressions[progression]
 
 # Scale Options
 scales = {
@@ -245,9 +265,13 @@ class Song:
     def __init__(self, scale, scale_name):
         self.scale = scale
         self.scale_name = scale_name
+        self.chord_progression = None
 
     def printScale(self):
         print self.scale_name + ": " + str(self.scale)
+
+    def print_cp(self):
+        print str(self.chord_progression)
 
     def random8Notes(self):
         # Always begins with tonic
