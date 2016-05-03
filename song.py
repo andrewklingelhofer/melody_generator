@@ -18,7 +18,7 @@ options = (
 
 def check_scale_options(i, song):
     if i == 'scale':
-        song.printScale()
+        song.print_scale()
     if i == 'print cp':
         song.print_cp()
     elif i == '8notes':
@@ -40,9 +40,11 @@ def check_scale_options(i, song):
         if len(a) > 2:
             relative = a[2]
             if relative == 'major':
-                get_relative_major(song.scale)
+                string = get_relative_major(song.scale)
+                print string
             elif relative == 'minor':
-                get_relative_minor(song.scale)
+                string = get_relative_minor(song.scale)
+                print string 
             else:
                 print "Please use valid relative"
         else:
@@ -52,9 +54,11 @@ def check_scale_options(i, song):
         if len(a) > 2:
             parallel = a[2]
             if parallel == 'major':
-                get_parallel_major(song.scale)
+                string = get_parallel_major(song.scale)
+                print string
             elif parallel == 'minor':
-                get_parallel_minor(song.scale)
+                string = get_parallel_minor(song.scale)
+                print string 
             else:
                 print "Please use valid relative"
         else:
@@ -200,7 +204,7 @@ def get_chord_progression(chord_progression, song):
         if not chord in chord_progression_names:
             print "Chord isn't part of accepted progressions"
             print "i.e. 'one five six four'"
-            return None
+            return "ERROR" 
     song.chord_progression = chord_progression
 
 # Scale Options
@@ -247,28 +251,28 @@ def get_relative_major(scale):
     first_note = scale[0]
     for major_scale in cof_major:
         if major_scale[0][5] == first_note:
-            print str(major_scale[1]) + ": " + str(major_scale[0])
+            return str(major_scale[1]) + ": " + str(major_scale[0])
 
 def get_relative_minor(scale):
     # Only works if passed a major scale
     first_note = scale[0]
     for minor_scale in cof_minor:
         if minor_scale[0][2] == first_note:
-            print str(minor_scale[1]) + ": " + str(minor_scale[0])
+            return str(minor_scale[1]) + ": " + str(minor_scale[0])
 
 def get_parallel_major(scale):
     # Only works if passed a minor scale
     first_note = scale[0]
     for major_scale in cof_major:
         if major_scale[0][0] == first_note:
-            print str(major_scale[1]) + ": " + str(major_scale[0])
+            return str(major_scale[1]) + ": " + str(major_scale[0])
 
 def get_parallel_minor(scale):
     # Only works if passed a major scale
     first_note = scale[0]
     for minor_scale in cof_minor:
         if minor_scale[0][0] == first_note:
-            print str(minor_scale[1]) + ": " + str(minor_scale[0])
+            return str(minor_scale[1]) + ": " + str(minor_scale[0])
 
 # Song Class
 class Song:
@@ -278,7 +282,7 @@ class Song:
         self.scale_name = scale_name
         self.chord_progression = None
 
-    def printScale(self):
+    def print_scale(self):
         print self.scale_name + ": " + str(self.scale)
 
     def print_cp(self):
@@ -324,7 +328,7 @@ def create_song():
     m_m = raw_input('>>> ')
     scale = get_scale(key, m_m)
     song = Song(scale[0], scale[1])
-    song.printScale()
+    song.print_scale()
     return song
 
 # Song Loop
