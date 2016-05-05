@@ -2,13 +2,17 @@ import sys
 sys.path.insert(0, '../')
 import song
 
+error = [] 
+
 # Check get_scale(key, m)
 major_scale = song.get_scale('d', 'M')
 minor_scale = song.get_scale('a', 'm')
 if not major_scale[0] == ['D', 'E', 'F#', 'G', 'A', 'B', 'C#']:
-    print "ERROR: get_scale returning incorrect major scale"
+    msg = "ERROR: get_scale returning incorrect major scale"
+    error.append(msg)
 if not minor_scale[0] == ['A', 'B', 'C', 'D', 'E', 'F', 'G']:
-    print "ERROR: get_scale returnning incorrect minor scale"
+    msg = "ERROR: get_scale returnning incorrect minor scale"
+    error.append(msg)
 
 # Check song.Song(__init__)
 major_song = song.Song(major_scale[0], major_scale[1]) 
@@ -21,10 +25,11 @@ a = "one two three four".split(' ')
 cp_major = song.get_chord_progression(a, major_song)
 cp_minor = song.get_chord_progression(a, minor_song)
 if cp_major == "ERROR":
-    print "ERROR: get_chord_progression returned None"
+    msg = "ERROR: get_chord_progression returned None"
+    error.append(msg)
 if cp_minor == "ERROR":
-    print "ERROR: get_chord_progression returned None"
-
+    msg = "ERROR: get_chord_progression returned None"
+    error.append(msg)
 
 # Check s.print_scale()
 #s.print_scale()
@@ -44,27 +49,50 @@ if cp_minor == "ERROR":
 # Check song.get_mode(mode, scale) return mode
 mode = song.get_mode('dorian', major_song.scale)
 if not mode == ['E', 'F#', 'G', 'A', 'B', 'C#', 'D']:
-    print "ERROR: get_mode returning incorrect mode"
+    msg = "ERROR: get_mode returning incorrect mode"
+    error.append(msg)
 
 # Check get_relative_major(scale)
 relative_major = song.get_relative_major(minor_song.scale)
-print relative_major
-print "Should be C Major"
+if not relative_major == "C Major: ['C', 'D', 'E', 'F', 'G', 'A', 'B']":
+    msg = "ERROR: get_relative_major incorrect output"
+    error.append(msg)
 
 # Check get_relative_minor(scale)
 # Should be B Minor
 relative_minor = song.get_relative_minor(major_song.scale)
-print relative_minor
-print "Should be B Minor"
+if not relative_minor == "B Minor: ['B', 'C#', 'D', 'E', 'F#', 'G', 'A']":
+    msg = "ERROR: get_relative_minor incorrect output"
+    error.append(msg)
 
 # Check get_parallel_major(scale)
 # Incorrect use, but should be D Major
 parallel_major = song.get_parallel_major(minor_song.scale)
-print parallel_major
-print "Should be A Major"
+if not parallel_major == "A Major: ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#']":
+    msg = "ERROR: get_parallel_major incorrect output"
+    error.append(msg)
 
 # Check get_parallel_minor(scale)
 # Should be D Minor
 parallel_minor = song.get_parallel_minor(major_song.scale)
-print parallel_minor
-print "Should be D Minor"
+if not parallel_minor == "D Minor: ['D', 'E', 'F', 'G', 'A', 'Bb', 'C']":
+    msg = "ERROR: get_parallel_minor incorrect output"
+    error.append(msg)
+
+# Check get_fifth_chord(scale)
+chord = song.get_fifth_chord(major_song.scale)
+if not chord == ['D', 'F#', 'A']:
+    msg = "ERROR: get_fifth_chord incorrect output"
+    error.append(msg)
+
+# Check get_seventh_chord(scale)
+chord = song.get_seventh_chord(minor_song.scale)
+if not chord == ['A', 'C', 'E', 'G']:
+    msg = "ERROR: get_seventh_chord incorrect output"
+    error.append(msg)
+
+if error:
+    for msg in error:
+        print msg
+else:
+    print "Functions run as expected"
