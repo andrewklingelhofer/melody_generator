@@ -12,8 +12,8 @@ options = (
     "'get parallel <major/minor>': get parallel minor/major key",
     "'cp <chord progression>': i.e. one five six four",
     "'cof <major/minor>': print circle of fifths",
-    "'h': help",
-    "'e': exit song",
+    "'h' or 'help': help",
+    "'e' or 'exit': exit song",
 )
 
 def check_scale_options(i, song):
@@ -82,7 +82,7 @@ def check_scale_options(i, song):
                 print "Please use valid circle of fifths type"
         else:
             print "Please enter circle of fifths type"
-    elif i == 'h':
+    elif i == 'h' or i == 'help':
         for option in options:
             print option
 
@@ -336,7 +336,7 @@ def song_options(song):
     while True:
         print "What would you like to do with this song? ('h' for help)"
         i = raw_input('>>> ')
-        if i == 'e':
+        if i == 'e' or i == 'exit':
             break
         else:
             check_scale_options(i, song)
