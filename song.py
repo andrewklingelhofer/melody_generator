@@ -10,6 +10,8 @@ options = (
     "'get mode <mode>': get mode from song key",
     "'get relative <major/minor>': get relative minor/major key",
     "'get parallel <major/minor>': get parallel minor/major key",
+    "'get base chord': get 1, 3, 5 of song scale",
+    "'get seventh chord': get 1, 3, 5, 7 of song scale:",
     "'cp <chord progression>': i.e. one five six four",
     "'cof <major/minor>': print circle of fifths",
     "'h' or 'help': help",
@@ -63,6 +65,12 @@ def check_scale_options(i, song):
                 print "Please use valid relative"
         else:
             print "Please enter relative type"
+    elif i == 'get base chord':
+        chord = get_fifth_chord(song.scale)
+        print chord
+    elif i == 'get seventh chord':
+        chord = get_seventh_chord(song.scale)
+        print chord
     elif i[:2] == 'cp':
         a = i.split(' ')
         if len(a) > 1:
@@ -273,6 +281,18 @@ def get_parallel_minor(scale):
     for minor_scale in cof_minor:
         if minor_scale[0][0] == first_note:
             return str(minor_scale[1]) + ": " + str(minor_scale[0])
+
+# Chords
+
+def get_fifth_chord(scale):
+    # Get 1, 3, 5 of scale
+    # i.e. get_fifth(cMajor) returns ['C', 'E', 'G']
+    return [scale[0], scale[2], scale[4]]
+
+def get_seventh_chord(scale):
+    # Get 1, 3, 5, 7 of scale
+    # i.e. get_seventh(cMajor) returns ['C', 'E', 'G', 'B']
+    return [scale[0], scale[2], scale[4], scale[6]]
 
 # Song Class
 class Song:
