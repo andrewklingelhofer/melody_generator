@@ -1,3 +1,8 @@
+# Things to do:
+# 1. Add more chords i.e. diminished, augmented
+# 2. Add ability to cp i.e. 'one flat two three' (cMajor, dbMajor/minor, eMinor)
+# 3. And more...
+
 from random import randint
 
 # Song Options
