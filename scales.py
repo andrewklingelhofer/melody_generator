@@ -31,6 +31,34 @@ minor_scales = {
     "ebMinor": (["Eb", "F", "Gb", "Ab", "Bb", "Cb", "Db"], 'Eb Minor'),
 }
 
+# Diminished Scales
+whole_half_diminished = {
+    "wh_cdim": (["C", "D", "Eb", "F", "Gb", "Ab", "A", "B"], 'C wh Dim'),
+    "wh_c#dim": (["C#", "D#", "E", "F", "G", "Ab", "Bb", "B"], 'C# wh Dim')
+}
+
+half_whole_diminished = {
+    "hw_cdim": (["C", "Db", "Eb", "Fb", "Gb", "G", "A", "Bb"], 'C hw Dim'),
+    "hw_c#dim": (["C#", "D", "E", "F", "G", "Ab", "Bb", "B"], 'C# hw Dim'),
+}
+
+def convert_wh_dim(scale_start):
+    wh_c = whole_half_diminished["wh_cdim"]
+    wh_cs = whole_half_diminished["wh_c#dim"]
+    if scale == "C":
+        return wh_c
+    elif scale == "C#":
+        return wh_cs
+    
+
+def convert_hw_dim(scale_start):
+    hw_c = half_whole_diminished["hw_cdim"]
+    hw_cs = half_whole_diminished["hw_c#dim"]
+    if scale == "C":
+        return hw_c
+    elif scale == "C#":
+        return hw_cs
+
 # Circle of Fifths: Major
 cof_major = [
         major_scales["cMajor"], 
