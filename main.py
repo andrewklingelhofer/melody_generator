@@ -5,7 +5,7 @@ from song import Song, create_song, song_options
 options = (
     "'c': create song",
     "'h': help",
-    "'q': exit",
+    "'q', 'e', 'exit', or 'quit': quit program",
 )
 
 def checkOptions(i):
@@ -15,7 +15,7 @@ def checkOptions(i):
     elif i == 'h':
         for option in options:
             print option
-    elif i == 'q':
+    elif i == 'q' or i == 'e' or i == 'exit' or i == 'quit':
         exit()
     if not song == None:
         return song
