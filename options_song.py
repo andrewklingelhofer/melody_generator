@@ -1,4 +1,4 @@
-from scales import major_scales, minor_scales, cof_major, cof_minor, get_mode, chord_progression_names, get_chord_progression, scales, get_scale, get_relative_major, get_relative_minor, get_parallel_major, get_parallel_minor, get_fifth_chord, get_seventh_chord
+from scales import major_scales, minor_scales, cof_major, cof_minor, get_mode, chord_progression_names, get_chord_progression, scales, get_scale, get_relative_major, get_relative_minor, get_parallel_major, get_parallel_minor, get_fifth_chord, get_seventh_chord, print_cof_major, print_cof_minor
 
 # Song Options
 options = (
@@ -83,9 +83,9 @@ def check_scale_options(i, song):
         if len(a) > 1:
             chord_type = a[1]
             if chord_type == 'major':
-                print cof_major
+                print_cof_major()
             elif chord_type == 'minor':
-                print cof_minor
+                print_cof_minor()
             else:
                 print "Please use valid circle of fifths type"
         else:

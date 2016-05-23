@@ -219,6 +219,14 @@ def get_parallel_minor(scale):
         if minor_scale[0][0] == first_note:
             return str(minor_scale[1]) + ": " + str(minor_scale[0])
 
+def print_cof_major():
+    for scale in cof_major:
+        print str(scale[1]) + ": " + str(scale[0])
+    
+def print_cof_minor():
+    for scale in cof_minor:
+        print str(scale[1]) + ": " + str(scale[0])
+
 # Chords
 
 def get_fifth_chord(scale):
