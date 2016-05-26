@@ -6,7 +6,8 @@ options = (
     "'print cp': print chord progression",
     "'8notes': print 8 random notes",
     "'16notes': print 16 random notes",
-    "'melody cp': print 4 notes per chord in progression",
+    "'random melody cp': print 4 notes per chord in progression",
+    "'stepwise melody cp': print 4 stepwise notes per chord in progression",
     "'get mode <mode>': get mode from song key",
     "'get relative <major/minor>': get relative minor/major key",
     "'get parallel <major/minor>': get parallel minor/major key",
@@ -27,8 +28,10 @@ def check_scale_options(i, song):
         song.random8Notes()
     elif i == '16notes':
         song.random16Notes()
-    elif i == 'melody cp':
-        song.cp_melody()
+    elif i == 'random melody cp':
+        song.cp_random_melody()
+    elif i == 'stepwise melody cp':
+        song.cp_stepwise_melody()
     elif i[:8] == 'get mode':
         a = i.split(' ')
         if len(a) > 2:

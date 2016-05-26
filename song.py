@@ -37,8 +37,8 @@ class Song:
             sixteenNotes.append(self.scale[num])
         print "Random 16 Notes: " + str(sixteenNotes)
 
-    def cp_melody(self):
-        if not self.chord_progression == None:
+    def cp_random_melody(self):
+        if not self.chord_progression == None or len(self.chord_progression) < 2:
             melody = [self.scale[0]]
             for x in range(0, 3):
                 num = randint(0, len(self.scale)-1)
@@ -52,7 +52,45 @@ class Song:
                     melody.append(chord[num])
             print melody 
         else:
-            print "No chord progression selected"
+            print "No chord progression or length too short"
+
+    # Add functions for stepwise notes or certain leaps, then make those functions random
+
+    def cp_stepwise_melody(self):
+        if not self.chord_progression == None or len(self.chord_progression) < 2:
+            count = 0
+            spot = 0
+            melody = [self.scale[0]]
+            for x in range(0, 3):
+                note = melody[count] 
+                spot = self.scale.index(note)
+                diff = randint(-1, 1)
+                spot += diff
+                if spot == -1:
+                    spot = len(self.scale) - 1
+                elif spot == len(self.scale):
+                    spot = 0
+                note = self.scale[spot]
+                melody.append(note)
+            for x in range(0, len(self.chord_progression)-1):
+                chord_name = self.chord_progression[x+1]
+                chord = get_mode(chord_name, self.scale)
+                for y in range(0, 4):
+                    # Same mode for this, so should be fine
+                    # But need to fix if note doesn't exist in chord progression
+                    note = melody[count]
+                    spot = chord.index(note)
+                    diff = randint(-1, 1)
+                    spot += diff
+                    if spot == -1:
+                        spot = len(chord) - 1
+                    elif spot == len(chord):
+                        spot = 0
+                    note = chord[spot]
+                    melody.append(note)
+            print melody
+        else:
+            print "No chord progression or length too short"
 
 def create_song():
     print "Input Key: (c, g, d, a, e, b, f, bb, eb, ab, db, gb, c#)"
