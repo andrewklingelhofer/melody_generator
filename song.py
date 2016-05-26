@@ -7,6 +7,23 @@ from random import randint
 from scales import major_scales, minor_scales, cof_major, cof_minor, get_mode, chord_progression_names, get_chord_progression, scales, get_scale, get_relative_major, get_relative_minor, get_parallel_major, get_parallel_minor, get_fifth_chord, get_seventh_chord
 from options_song import options, check_scale_options
 
+# Add functions for stepwise and leap note functions
+def stepwise(scale, prev_note):
+    # Scale should be modal version (for now)
+    # Stepwise is one or two notes
+    # Returns next note 
+    spot = scale.index(prev_note)
+    num = randint(-2, 2)
+    if num < 0:
+        spot += num
+        if spot < 0:
+            spot += len(scale)
+    elif num > 0:
+        spot += num
+        if spot >= len(scale):
+            spot -= len(scale)
+    return scale[spot]
+
 # Song Class
 class Song:
     
